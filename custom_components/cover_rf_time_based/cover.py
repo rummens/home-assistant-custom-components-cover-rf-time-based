@@ -155,13 +155,12 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     platform = entity_platform.current_platform.get()
 
     platform.async_register_entity_service(
-        SERVICE_SET_KNOWN_POSITION, POSITION_SCHEMA, "set_known_position"
+        SERVICE_SET_KNOWN_POSITION, POSITION_SCHEMA, "set_known_position", [CoverEntity]
     )
-
+    
     platform.async_register_entity_service(
-        SERVICE_SET_KNOWN_ACTION, ACTION_SCHEMA, "set_known_action"
+        SERVICE_SET_KNOWN_ACTION, ACTION_SCHEMA, "set_known_action", [CoverEntity]
     )
-
 
 class CoverTimeBased(CoverEntity, RestoreEntity):
     def __init__(self, 
