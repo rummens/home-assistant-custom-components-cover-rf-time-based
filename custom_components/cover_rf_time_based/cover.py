@@ -96,22 +96,20 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     }
 )
 
-POSITION_SCHEMA = vol.Schema(
-    {
+POSITION_SCHEMA = {
         vol.Required(ATTR_ENTITY_ID): cv.entity_ids,
         vol.Required(ATTR_POSITION): cv.positive_int,
         vol.Optional(ATTR_CONFIDENT, default=False): cv.boolean,
         vol.Optional(ATTR_POSITION_TYPE, default=ATTR_POSITION_TYPE_TARGET): cv.string
     }
-)
 
 
-ACTION_SCHEMA = vol.Schema(
-    {
+
+ACTION_SCHEMA = {
         vol.Required(ATTR_ENTITY_ID): cv.entity_ids,
         vol.Required(ATTR_ACTION): cv.string
     }
-)
+
 
 
 DOMAIN = "cover_rf_time_based"
@@ -155,11 +153,11 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     platform = entity_platform.current_platform.get()
 
     platform.async_register_entity_service(
-        SERVICE_SET_KNOWN_POSITION, POSITION_SCHEMA, "set_known_position", [CoverEntity]
+        SERVICE_SET_KNOWN_POSITION, POSITION_SCHEMA, "set_known_position",
     )
     
     platform.async_register_entity_service(
-        SERVICE_SET_KNOWN_ACTION, ACTION_SCHEMA, "set_known_action", [CoverEntity]
+        SERVICE_SET_KNOWN_ACTION, ACTION_SCHEMA, "set_known_action",
     )
 
 class CoverTimeBased(CoverEntity, RestoreEntity):
